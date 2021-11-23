@@ -34,12 +34,12 @@ public class BoardDTO {
 	private String deleteYn;
 	
 	// 등록일
-	private LocalDateTime createTime;
+	private LocalDateTime createTm;
 	
 	// 수정일
-	private LocalDateTime updateTime;
+	private LocalDateTime updateTm;
 	
 	// 삭제일
-	private LocalDateTime deleteTime;
+	private LocalDateTime deleteTm;
 	
 }

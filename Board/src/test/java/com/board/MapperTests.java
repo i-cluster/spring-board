@@ -11,6 +11,8 @@ import com.board.domain.BoardDTO;
 import com.board.mapper.BoardMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @SpringBootTest
 public class MapperTests {
@@ -33,7 +35,9 @@ public class MapperTests {
 	public void testOfSelectDetail() {
 		BoardDTO board = boardMapper.selectBoardDetail((long) 1);
 		try {
-			String boardJson = new ObjectMapper().writeValueAsString(board);		// Jackson 라이브러리를 이용해 board 정보를 JSON 문자열로 변환
+			// Jackson 라이브러리를 이용해 board 정보를 JSON 문자열로 변환
+			ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+			String boardJson = mapper.writeValueAsString(board);
 			
 			System.out.println("====================");
 			System.out.println(boardJson);
@@ -56,7 +60,8 @@ public class MapperTests {
 		if (result == 1) {
 			BoardDTO board = boardMapper.selectBoardDetail((long) 1);
 			try {
-				String boardJson = new ObjectMapper().writeValueAsString(board);
+				ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+				String boardJson = mapper.writeValueAsString(board);
 				
 				System.out.println("====================");
 				System.out.println(boardJson);
@@ -74,7 +79,8 @@ public class MapperTests {
 		if (result == 1) {
 			BoardDTO board = boardMapper.selectBoardDetail((long) 1);
 			try {
-				String boardJson = new ObjectMapper().writeValueAsString(board);
+				ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule()).disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+				String boardJson = mapper.writeValueAsString(board);
 				
 				System.out.println("====================");
 				System.out.println(boardJson);
@@ -88,7 +94,7 @@ public class MapperTests {
 	
 	@Test
 	public void testMultipleCreate() {
-		for (int i = 2; i <= 50; i++) {
+		for (int i = 1; i <= 50; i++) {
 			BoardDTO params = new BoardDTO();
 			params.setTitle(i + "번 글 제목");
 			params.setContent(i + "번 글 내용");
