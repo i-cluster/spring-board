@@ -22,10 +22,11 @@ public class ServiceTests {
 	@Test
 	public void testOfRegister() {
 		BoardDTO params = new BoardDTO();
-		params.setIdx((long) 2);
-		params.setTitle("수정 2번 글 제목");
-		params.setContent("수정 2번 글 내용");
-		params.setWriter("수정 2번 테스터");
+		params.setIdx((long) 51);
+		// params.setTitle("51번 글 제목");
+		// params.setContent("51번 글 내용");
+		// params.setWriter("51번 테스터");
+		params.setNoticeYn("");
 		
 		boolean result = boardService.registerBoard(params);
 		System.out.println(result);
@@ -70,7 +71,6 @@ public class ServiceTests {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			
 		}
 	}
