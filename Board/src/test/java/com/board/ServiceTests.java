@@ -23,9 +23,9 @@ public class ServiceTests {
 	public void testOfRegister() {
 		BoardDTO params = new BoardDTO();
 		params.setIdx((long) 51);
-		// params.setTitle("51번 글 제목");
-		// params.setContent("51번 글 내용");
-		// params.setWriter("51번 테스터");
+		params.setTitle("51번 글 제목");
+		params.setContent("51번 글 내용");
+		params.setWriter("51번 테스터");
 		params.setNoticeYn("");
 		
 		boolean result = boardService.registerBoard(params);
