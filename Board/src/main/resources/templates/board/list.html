@@ -30,7 +30,7 @@
 					<tr th:if="${not #lists.isEmpty( boardList )}" th:each="row: ${boardList}">
 						<td scope="row" th:text="${#strings.equals( row.noticeYn, 'Y' ) ? '공지' : row.idx}"></td>
 						<td class="text-left">
-							<a th:href="@{/board/view.do( idx=${row.idx} )}" th:text="${row.title}"></a>
+							<a th:href="@{/board/detail.do( idx=${row.idx} )}" th:text="${row.title}"></a>
 						</td>
 						<td th:text="${row.writer}"></td>
 						<td th:text="${#temporals.format( row.createTm, 'yyyy-MM-dd' )}"></td>

@@ -66,4 +66,23 @@ public class BoardController {
 		return "board/list";
 	}
 	
+	@GetMapping(value = "/board/detail.do")
+	public String openBoardDetail(@RequestParam(value = "idx", required = false) Long idx, Model model) {
+		// 인덱스 값이 없으면 글 목록으로 돌아가기
+		if (idx == null) {
+			return "redirect:/board/list.do";
+		}
+		
+		BoardDTO board = boardService.getBoardDetail(idx);
+		
+		// 삭제 or 비밀 글이면 글 목록으로 돌아가기
+		if (board == null || "Y".equals(board.getDeleteYn())) {
+			return "redirect:/board/list.do";
+		}
+		
+		model.addAttribute("board", board);
+		
+		return "board/detail";
+	}
+	
 }
