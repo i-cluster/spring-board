@@ -8,35 +8,35 @@
 		<div class="card-content">
 			<form class="form-horizontal form-view" th:object="${board}">
 				<div class="form-group">
-					<label for="int-type-1" class="col-sm-2 control-label">제목</label>
+					<label for="inp-type-1" class="col-sm-2 control-label">제목</label>
 					<div class="col-sm-10">
 						<p class="form-control" th:text="*{title}"></p>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label for="int-type-2" class="col-sm-2 control-label">작성자</label>
+					<label for="inp-type-2" class="col-sm-2 control-label">작성자</label>
 					<div class="col-sm-10">
 						<p class="form-control" th:text="*{writer}"></p>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label for="int-type-5" class="col-sm-2 control-label">내용</label>
+					<label for="inp-type-5" class="col-sm-2 control-label">내용</label>
 					<div class="col-sm-10">
 						<p class="form-control" th:text="*{content}"></p>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label for="int-type-5" class="col-sm-2 control-label">등록일</label>
+					<label for="inp-type-5" class="col-sm-2 control-label">등록일</label>
 					<div class="col-sm-10">
 						<p class="form-control" th:text="*{#temporals.format( createTm, 'yyyy-MM-dd' )}"></p>
 					</div>
 				</div>
 				
 				<div class="form-group">
-					<label for="int-type-5" class="col-sm-2 control-label">조회 수</label>
+					<label for="inp-type-5" class="col-sm-2 control-label">조회 수</label>
 					<div class="col-sm-10">
 						<p class="form-control" th:text="*{viewCnt}"></p>
 					</div>
@@ -62,7 +62,7 @@
 					<div class="input-group margin-bottom-20">
 						<input type="email" class="form-control" placeholder="" />
 						<div class="input-group-btn">
-							<button type="button" class="btn waves-effect waves-light"><i class="fa fa-commenting" aria-hiddent="true"></i></button>
+							<button type="button" class="btn waves-effect waves-light"><i class="fa fa-commenting" aria-hidden="true"></i></button>
 						</div>
 					</div>
 					
@@ -77,5 +77,33 @@
 				</form>
 			</div>
 		</div>
+	</th:block>
+	
+	<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			/* <![CDATA[ */
+				
+			function deleteBoard(idx) {
+				
+				if (confirm(idx + "번 게시글을 삭제할까요?")) {
+					// [[ ]] - 타임리프에서 자바스크립트로 객체 값 받아오기
+					var uri = [[ @{/board/delete.do} ]];
+					var html = "";
+					
+					html += '<form name="dataForm" action="' + uri + '" method="post">';
+					html += '<input type="hidden" name="idx" value="' + idx + '"/>';
+					html += '</form>';
+					
+					// body에 엘리먼트 추가
+					$("body").append(html);
+					
+					// 문서에서 엘리먼트를 찾아 컨트롤러에 전송
+					document.dataForm.submit();
+				}
+				
+			}
+				
+			/* ]]> */
+		</script>
 	</th:block>
 </html>
