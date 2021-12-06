@@ -82,11 +82,11 @@
 	<th:block layout:fragment="script">
 		<script th:inline="javascript">
 			/* <![CDATA[ */
-				
+			
 			function deleteBoard(idx) {
 				
 				if (confirm(idx + "번 게시글을 삭제할까요?")) {
-					// [[ ]] - 타임리프에서 자바스크립트로 객체 값 받아오기
+					// 타임리프에서 자바스크립트로 객체 값 받아오기
 					var uri = [[ @{/board/delete.do} ]];
 					var html = "";
 					
@@ -102,7 +102,7 @@
 				}
 				
 			}
-				
+			
 			/* ]]> */
 		</script>
 	</th:block>
