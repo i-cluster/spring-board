@@ -77,6 +77,8 @@
 			notice_yn ASC,
 			idx DESC,
 			create_tm DESC
+		LIMIT
+			#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 	
 	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">

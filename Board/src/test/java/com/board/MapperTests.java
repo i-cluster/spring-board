@@ -106,9 +106,11 @@ public class MapperTests {
 	
 	@Test
 	public void testSelectList() {
-		int boardTotalCount = boardMapper.selectBoardTotalCount();
+		BoardDTO boardDTO = new BoardDTO();
+		
+		int boardTotalCount = boardMapper.selectBoardTotalCount(boardDTO);
 		if (boardTotalCount > 0) {
-			List<BoardDTO> boardList = boardMapper.selectBoardList();
+			List<BoardDTO> boardList = boardMapper.selectBoardList(boardDTO);
 			
 			if (CollectionUtils.isEmpty(boardList) == false) {
 				for (BoardDTO board : boardList) {

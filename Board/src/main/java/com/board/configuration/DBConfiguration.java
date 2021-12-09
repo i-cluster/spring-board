@@ -53,7 +53,7 @@ public class DBConfiguration {
 		factoryBean.setDataSource(dataSource());
 		
 		factoryBean.setMapperLocations(applicationContext.getResources("classpath:/mappers/**/*Mapper.xml"));			// 지정 패턴에 포함되는 XML Mapper 인식
-		factoryBean.setTypeAliasesPackage("com.board.domain");			// XML parameterType/resultType 기본 패키지 경로 설정('*' 애스터리스크 사용 가능)
+		factoryBean.setTypeAliasesPackage("com.board.*");			// XML parameterType/resultType 기본 패키지 경로 설정('*' 애스터리스크 사용 가능)
 		factoryBean.setConfiguration(mybatisConfig());					// mybatis.configuration(Java <-> XML) 등록 Bean을 설정 파일로 지정
 		
 		return factoryBean.getObject();			// getObject 메서드가 리턴하는 객체 생성
