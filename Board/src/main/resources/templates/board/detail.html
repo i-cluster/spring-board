@@ -66,14 +66,7 @@
 						</div>
 					</div>
 					
-					<ul class="notice-list">
-						<li>
-							<span class="name">JH Lee</span>
-							<span class="desc">New settings available</span>
-							<span class="time">2021.11.29</span>
-							<button type="button" class="btn btn-xs btn-circle"><i class="fa fa-close" aria-hidden="true"></i></button>
-						</li>
-					</ul>
+					<ul class="notice-list"></ul>
 				</form>
 			</div>
 		</div>
@@ -82,6 +75,10 @@
 	<th:block layout:fragment="script">
 		<script th:inline="javascript">
 			/* <![CDATA[ */
+				
+			$(function() {
+				printCommentList();
+			});
 			
 			function deleteBoard(idx) {
 				
@@ -109,6 +106,32 @@
 					// 문서에서 엘리먼트를 찾아 컨트롤러에 전송
 					document.dataForm.submit();
 				}
+			}
+			
+			function printCommentList() {
+				
+				// Ajax 매핑 URI
+				var uri = [[ @{/comments/} + ${board.idx} ]];
+				
+				// Ajax GET
+				$.get(uri, function(response) {
+					if (isEmpty(response) == false) {
+						var commentsHtml = "";
+						
+						$(response.commentList).each(function(idx, comment) {
+							commentsHtml +=`
+								<li>
+									<span class="name">${comment.writer}</span>
+									<span class="desc">${comment.content}</span>
+									<span class="time">${moment(comment.createTm).format('YYYY-MM-DD HH:mm:ss')}</span>
+									<button type="button" class="btn btn-xs btn-circle"><i-class="fa fa-close" aria-hidden="true"></li></button>
+								</li>
+							`;
+						});
+						
+						$(".notice-list").html(commentsHtml);
+					}
+				}, "json");
 			}
 			
 			/* ]]> */
