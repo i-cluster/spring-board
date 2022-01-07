@@ -39,7 +39,6 @@ public class BoardServiceImpl implements BoardService {
 		int queryResult = 0;
 		
 		BoardDTO board = boardMapper.selectBoardDetail(idx);
-		System.out.println(board.getDeleteYn());
 		
 		if (board != null && "N".equals(board.getDeleteYn())) {			// 글이 존재하고 삭제 상태가 아닐 경우 실행
 			queryResult = boardMapper.deleteBoard(idx);
